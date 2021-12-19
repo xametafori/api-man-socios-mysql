@@ -34,10 +34,10 @@ CREATE TABLE cine.Socio
 
 .\mvnw clean package -DskipTests
 
-docker build -t api-man-socios-mysql:v1 .
+docker build -t api-man-socios-mysql-p95:v1 .
 
-docker run -p 8095:8095 --name api-man-socios-mysql --network javapractica2 api-man-socios-mysql:v1
+docker run -p 8095:8095 --name api-man-socios-mysql-p95 --network javapractica2 api-man-socios-mysql-p95:v1
 
-docker build -t api-man-socios-mysql-96:v1 .
+docker build -t api-man-socios-mysql-p96:v1 .
 
-docker run -p 8096:8096 --name api-man-socios-mysql-96 --network javapractica2 api-man-socios-mysql-96:v1
+docker run -p 8096:8096 --name api-man-socios-mysql-p96 --network javapractica2 api-man-socios-mysql-p96:v1
