@@ -1,0 +1,43 @@
+//**Creando network
+
+docker network create javapractica2
+
+//** descargamos mysql
+
+docker pull mysql:8
+
+//** creamos el contenedor
+
+docker run -p 3307:3307 --name microservicios-mysql8 --network javapractica2 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=cine -d mysql:8
+
+//** ejecutamos comando en cmd para crear base de datos
+docker exec -it microservicios-mysql8 mysql -p
+
+
+
+//** creamos base de datos
+
+create database cine;
+
+//** Creamos la tabla
+CREATE TABLE cine.Socio
+(
+    Secuencia INT primary key,
+    dni VARCHAR(8) NOT NULL,
+    estado VARCHAR(20) NOT NULL
+) ;
+
+//**Insertamos
+
+
+//Ejecutar para docker para despliegue del servicio y creacion del contenedor
+
+.\mvnw clean package -DskipTests
+
+docker build -t api-man-socios-mysql:v1 .
+
+docker run -p 8095:8095 --name api-man-socios-mysql --network javapractica2 api-man-socios-mysql:v1
+
+docker build -t api-man-socios-mysql-96:v1 .
+
+docker run -p 8096:8096 --name api-man-socios-mysql-96 --network javapractica2 api-man-socios-mysql-96:v1
